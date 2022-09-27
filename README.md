@@ -1,6 +1,3 @@
-# proyecto-carritols-cursojs
-
-
 # PRACTICAS JAVASCRIPT -  CARRITO DE COMPRAS
 Creando un carrito de compras con JavaScript
 
