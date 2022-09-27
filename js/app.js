@@ -3,6 +3,7 @@ const carrito = document.querySelector('#carrito')
 const contenedorCarrito = document.querySelector('#lista-carrito tbody')
 const vaciarCarritoBtn = document.querySelector('#vaciar-carrito')
 const listaCursos = document.querySelector('#lista-cursos')
+let articulosCarrito = []
 
 cargarEventListeners()
 function cargarEventListeners() {
@@ -23,7 +24,7 @@ function agregarCurso(e) {
 
 //Lee contenido del HTML y extrae info curso
 function leerDatosCurso(curso) {
-    console.log(curso);
+    // console.log(curso);
     //Creo objeto con el contenido del curso
     const infoCurso = {
         imagen: curso.querySelector('img').src,
@@ -32,5 +33,39 @@ function leerDatosCurso(curso) {
         id: curso.querySelector('a').getAttribute('data-id'),
         cantidad: 1
     }
-    console.log(infoCurso);
+    // console.log(infoCurso);
+
+    //Agrega elementos al arreglo de carrito
+    articulosCarrito = [...articulosCarrito, infoCurso]
+    console.log(articulosCarrito);
+    carritoHTML()
+}
+
+
+//Muestra el carrito de compras en el HTML
+function carritoHTML() {
+
+    //Limpiar HTML para evitar duplicados
+    limpiarHTML()
+
+    articulosCarrito.forEach( curso => {
+        const row = document.createElement('tr')
+        row.innerHTML = `
+            <td>
+                ${curso.titulo}
+            </td>
+        `
+        //Agrega el HTML del carrito en el tbody
+        contenedorCarrito.appendChild(row)
+    })
+}
+
+//Funcion que elimina duplicado en carrito
+function limpiarHTML() {
+    //Forma lenta
+    // contenedorCarrito.innerHTML = ''
+
+    while (contenedorCarrito.firstChild) {
+        contenedorCarrito.removeChild(contenedorCarrito.firstChild)
+    }
 }
